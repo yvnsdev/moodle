@@ -110,7 +110,6 @@ class component {
     protected static $filestomap = ['lib.php', 'settings.php'];
     /** @var array associative array of PSR-0 namespaces and corresponding paths. */
     protected static $psr0namespaces = [
-        'Mustache' => 'public/lib/mustache/src/Mustache',
     ];
     /** @var array<string|array<string>> associative array of PRS-4 namespaces and corresponding paths. */
     protected static $psr4namespaces = [
@@ -122,6 +121,9 @@ class component {
         \GeoIp2::class => 'public/lib/maxmind/GeoIp2/src',
         \FastRoute::class => 'public/lib/nikic/fast-route/src',
         \Firebase\JWT::class => 'public/lib/php-jwt/src',
+        \Google::class => 'public/lib/google2/src',
+        \Google\Auth::class => 'public/lib/google2-auth/src',
+        \Google\Service::class => 'public/lib/google2-service/src',
         \GuzzleHttp::class => 'public/lib/guzzlehttp/guzzle/src',
         \GuzzleHttp\Promise::class => 'public/lib/guzzlehttp/promises/src',
         \GuzzleHttp\Psr7::class => 'public/lib/guzzlehttp/psr7/src',
@@ -137,16 +139,19 @@ class component {
         \MatthiasMullie\Minify::class => 'public/lib/minify/matthiasmullie-minify/src',
         \MatthiasMullie\PathConverter::class => 'public/lib/minify/matthiasmullie-pathconverter/src',
         \MaxMind\Db::class => 'public/lib/maxmind/MaxMind/src/MaxMind/Db',
+        \Monolog::class => 'public/lib/monolog/src/Monolog',
         \Michelf::class => 'public/lib/markdown/Michelf',
         \MoodleHQ::class => [
             'public/lib/rtlcss/src/MoodleHQ',
         ],
+        \Mustache::class => 'public/lib/mustache/src',
         \OpenSpout::class => 'public/lib/openspout/src',
         \Packback\Lti1p3::class => 'public/lib/lti1p3/src',
         \PHPMailer\PHPMailer::class => 'public/lib/phpmailer/src',
         \PhpOffice\PhpSpreadsheet::class => 'public/lib/phpspreadsheet/phpspreadsheet/src/PhpSpreadsheet',
         \PhpXmlRpc::class => 'public/lib/phpxmlrpc/src',
         \Phpml::class => 'public/lib/mlbackend/php/phpml/src/Phpml',
+        \Psr\Cache::class => "public/lib/psr/cache/src",
         \Psr\Clock::class => 'public/lib/psr/clock/src',
         \Psr\Container::class => 'public/lib/psr/container/src',
         \Psr\EventDispatcher::class => 'public/lib/psr/event-dispatcher/src',

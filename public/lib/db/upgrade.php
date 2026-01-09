@@ -1490,7 +1490,7 @@ function xmldb_main_upgrade($oldversion) {
                   FROM {customfield_data} d
                   JOIN {customfield_field} f ON d.fieldid = f.id
                   JOIN {customfield_category} c ON f.categoryid = c.id";
-        $records = $DB->get_records_sql($sql);
+        $records = $DB->get_recordset_sql($sql);
 
         foreach ($records as $r) {
             $DB->update_record('customfield_data', (object)[
@@ -1500,6 +1500,8 @@ function xmldb_main_upgrade($oldversion) {
                 'itemid'    => $r->itemid,
             ]);
         }
+
+        $records->close();
 
         // Define table customfield_shared to be created.
         $table = new xmldb_table('customfield_shared');
@@ -1616,6 +1618,18 @@ function xmldb_main_upgrade($oldversion) {
 
         // Main savepoint reached.
         upgrade_main_savepoint(true, 2025121200.01);
+    }
+
+    if ($oldversion < 2025121900.01) {
+            // Define field nextversion to be added to question_bank_entries.
+        $table = new xmldb_table('question_bank_entries');
+        $field = new xmldb_field('nextversion', XMLDB_TYPE_INTEGER, '10', null, null, null, null, 'ownerid');
+
+        // Conditionally launch add field nextversion.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+        upgrade_main_savepoint(true, 2025121900.01);
     }
 
     return true;
